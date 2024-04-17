@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../data.dart';
+import '../widgets/scrollable_games_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -90,7 +91,17 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             _topBarWidget(),
             SizedBox(height: _deviceHeight * 0.13),
-            _featuredGamesInfoWidget()
+            _featuredGamesInfoWidget(),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: _deviceHeight * 0.01),
+              child: ScrollableGamesWidget(
+                  _deviceHeight * 0.24, _deviceWidth, true, games),
+            ),
+            SizedBox(height: _deviceHeight * 0.006),
+            _featuredGameBannerWidget(),
+            SizedBox(height: _deviceHeight * 0.014),
+            ScrollableGamesWidget(
+                _deviceHeight * 0.22, _deviceWidth, false, games2)
           ],
         ));
   }
@@ -164,6 +175,20 @@ class _HomePageState extends State<HomePage> {
             }).toList(),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _featuredGameBannerWidget() {
+    return Container(
+      height: _deviceHeight * 0.11,
+      width: _deviceWidth,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: NetworkImage(featuredGames[3].coverImage.url),
+        ),
       ),
     );
   }
